@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gmail登録ガイド｜歌舞伎会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f3ee;
+    --card: #ffffff;
+    --ink: #2b2522;
+    --sub: #6f6560;
+    --accent: #9e1b1b;
+    --accent-soft: #f6e4e1;
+    --line: #e4ddd5;
+    --tap: #e53935;
+    --g-blue: #1a73e8;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 0 16px 64px; }
+
+  /* ヘッダー */
+  header {
+    background: var(--accent);
+    color: #fff;
+    padding: 32px 20px 28px;
+    text-align: center;
+  }
+  header .label { font-size: 13px; letter-spacing: .15em; opacity: .85; }
+  header h1 { margin: 6px 0 0; font-size: 24px; line-height: 1.5; }
+  .address {
+    display: inline-block;
+    margin-top: 14px;
+    background: rgba(255,255,255,.15);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 15px;
+    word-break: break-all;
+  }
+
+  /* 説明ブロック */
+  .intro, .box {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .intro h2, .box h2 { margin: 0 0 8px; font-size: 18px; }
+  .intro ul, .box ul { margin: 0; padding-left: 1.2em; }
+  .intro li, .box li { margin: 4px 0; }
+  .note {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 15px;
+    margin-top: 12px;
+  }
+
+  /* 目次 */
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .toc a {
+    flex: 1 1 calc(50% - 8px);
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .toc b { color: var(--accent); margin-right: 4px; }
+
+  /* 手順 */
+  .step { margin-top: 40px; }
+  .step-head { display: flex; align-items: center; gap: 12px; }
+  .num {
+    flex: none;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    display: grid; place-items: center;
+  }
+  .step h2 { margin: 0; font-size: 20px; line-height: 1.5; }
+  .step p { margin: 12px 0 0; }
+  .em { color: var(--accent); font-weight: 700; }
+  .os {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 0 6px;
+    margin-right: 4px;
+    background: #ece7e1;
+    color: var(--sub);
+  }
+
+  /* スマホ画面の図 */
+  .phone {
+    position: relative;
+    width: 260px;
+    margin: 20px auto 0;
+    border: 10px solid #1d1d1f;
+    border-radius: 36px;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    font-family: "Roboto", "Noto Sans JP", sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #202124;
+  }
+  .screen { position: relative; height: 470px; overflow: hidden; }
+  .status {
+    height: 26px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 18px;
+    font-size: 11px; font-weight: 700;
+  }
+  .status .r { letter-spacing: 2px; }
+  .dim { position: absolute; inset: 0; background: rgba(0,0,0,.35); }
+
+  /* タップの印 */
+  .tap { position: relative; }
+  .tap::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 3px solid var(--tap);
+    border-radius: 12px;
+    animation: pulse 1.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .tap.round::after { border-radius: 50%; }
+  .finger {
+    position: absolute;
+    background: var(--tap);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+    z-index: 5;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(1.05); }
+  }
+  @media (prefers-reduced-motion: reduce) { .tap::after { animation: none; } }
+
+  /* ホーム画面 */
+  .home { background: linear-gradient(160deg, #6d8fb3, #c9a9a0); color: #fff; }
+  .home .status { color: #fff; }
+  .apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 10px; padding: 20px 16px; }
+  .app { text-align: center; font-size: 9px; }
+  .app i {
+    display: block;
+    width: 44px; height: 44px;
+    margin: 0 auto 4px;
+    border-radius: 11px;
+    background: rgba(255,255,255,.35);
+  }
+  .app.gmail i { background: #fff; display: grid; place-items: center; }
+
+  /* Gmail 画面 */
+  .searchbar {
+    margin: 6px 10px;
+    height: 40px;
+    border-radius: 20px;
+    background: #eef2f9;
+    display: flex; align-items: center;
+    padding: 0 6px 0 14px;
+    gap: 10px;
+    color: #5f6368;
+  }
+  .searchbar .q { flex: 1; }
+  .avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-size: 13px;
+    flex: none;
+  }
+  .av-a { background: #7b6fd0; }
+  .av-k { background: var(--accent); }
+  .inbox-label { padding: 8px 16px 4px; font-size: 11px; color: #5f6368; }
+  .mail { display: flex; gap: 10px; padding: 8px 14px; }
+  .mail .avatar { width: 32px; height: 32px; }
+  .mail .lines { flex: 1; }
+  .bar { height: 8px; border-radius: 4px; background: #e3e3e3; margin: 4px 0; }
+  .bar.dark { background: #c4c7c5; }
+  .w70 { width: 70%; } .w90 { width: 90%; } .w50 { width: 50%; } .w80 { width: 80%; }
+  .compose {
+    position: absolute; right: 14px; bottom: 16px;
+    background: #c2e7ff; border-radius: 14px;
+    padding: 12px 14px; font-weight: 500;
+  }
+
+  /* アカウントメニュー */
+  .sheet {
+    position: absolute; left: 8px; right: 8px; top: 34px;
+    background: #f2f6fc;
+    border-radius: 24px;
+    padding: 12px;
+    z-index: 2;
+  }
+  .sheet .who { text-align: center; padding: 8px 0 24px; }
+  .sheet .who .avatar { width: 44px; height: 44px; margin: 0 auto 6px; font-size: 18px; }
+  .sheet .manage {
+    display: inline-block; margin-top: 6px;
+    border: 1px solid #747775; border-radius: 999px;
+    padding: 3px 12px; font-size: 11px;
+  }
+  .menu { background: #fff; border-radius: 16px; }
+  .menu div {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px;
+    border-top: 1px solid #eef0f2;
+  }
+  .menu div:first-child { border-top: 0; }
+  .menu .tap::after { inset: 3px; }
+  .plus {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #e8eaed; display: grid; place-items: center;
+    font-size: 18px; color: #444;
+  }
+  .gear { width: 28px; text-align: center; color: #5f6368; font-size: 16px; }
+
+  /* メールのセットアップ */
+  .titlebar { padding: 10px 16px; font-size: 16px; font-weight: 500; }
+  .provider {
+    display: flex; align-items: center; gap: 14px;
+    padding: 13px 18px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+  }
+  .logo-dot { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 12px; color: #fff; }
+
+  /* iPhone ダイアログ */
+  .dialog {
+    position: absolute; left: 22px; right: 22px; top: 150px;
+    background: rgba(245,245,245,.97);
+    border-radius: 14px;
+    text-align: center;
+    z-index: 3;
+    overflow: hidden;
+  }
+  .dialog .msg { padding: 16px 14px 12px; font-size: 12px; }
+  .dialog .msg b { display: block; font-size: 13px; margin-bottom: 4px; }
+  .dialog .btns { display: flex; border-top: 1px solid #d1d1d6; }
+  .dialog .btns div { flex: 1; padding: 10px 0; color: #007aff; font-size: 14px; }
+  .dialog .btns div + div { border-left: 1px solid #d1d1d6; font-weight: 600; }
+
+  /* Google ログイン */
+  .gsign { padding: 20px 20px 0; }
+  .gword { font-size: 18px; font-weight: 500; letter-spacing: -.5px; }
+  .gword span:nth-child(1){color:#4285f4}.gword span:nth-child(2){color:#ea4335}.gword span:nth-child(3){color:#fbbc05}.gword span:nth-child(4){color:#4285f4}.gword span:nth-child(5){color:#34a853}.gword span:nth-child(6){color:#ea4335}
+  .gsign h3 { font-size: 20px; font-weight: 400; margin: 14px 0 4px; }
+  .gsign .sub { color: #444; font-size: 12px; }
+  .field {
+    margin-top: 22px;
+    border: 2px solid var(--g-blue);
+    border-radius: 6px;
+    padding: 12px 10px 10px;
+    position: relative;
+    font-size: 13px;
+  }
+  .field label {
+    position: absolute; top: -9px; left: 8px;
+    background: #fff; padding: 0 4px;
+    font-size: 10px; color: var(--g-blue);
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid #dadce0; border-radius: 999px;
+    padding: 3px 10px 3px 3px; margin-top: 12px; font-size: 11px;
+  }
+  .chip .avatar { width: 20px; height: 20px; font-size: 10px; }
+  .link { color: var(--g-blue); font-size: 12px; margin-top: 12px; }
+  .gbtns { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; position: absolute; left: 0; right: 0; bottom: 30px; }
+  .gbtn { background: var(--g-blue); color: #fff; border-radius: 999px; padding: 8px 20px; font-weight: 500; white-space: nowrap; flex: none; }
+  .gbtns .link { font-size: 11px; }
+
+  /* 本人確認 */
+  .code-box { display: flex; gap: 6px; margin-top: 16px; }
+  .code-box div { flex: 1; border: 1px solid #c4c7c5; border-radius: 6px; height: 36px; display: grid; place-items: center; font-size: 15px; }
+
+  /* 完成 */
+  .done-list .menu div { padding: 10px 14px; }
+  .check { color: #188038; font-weight: 700; margin-left: auto; }
+
+  /* 文章版 */
+  .faq h3 { font-size: 16px; margin: 16px 0 4px; }
+  .faq p { margin: 0; font-size: 15px; }
+
+  footer { text-align: center; color: var(--sub); font-size: 13px; margin-top: 48px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">歌舞伎会 スマホ操作ガイド</div>
+  <h1>Gmailアプリに<br>歌舞伎会のメールを追加する</h1>
+  <div class="address">kabukikai2525@gmail.com</div>
+</header>
+
+<div class="wrap">
+
+  <section class="intro">
+    <h2>はじめる前に</h2>
+    <ul>
+      <li>かかる時間は<span class="em">5分ほど</span>です</li>
+      <li>メールアドレスと<span class="em">パスワード</span>は、中畑から<span class="em">LINE</span>で届きます。先にLINEを開いて確かめておいてください</li>
+      <li>いま使っているご自分のGmailは、そのまま残ります。消えません</li>
+    </ul>
+    <div class="note">図の<b style="color:var(--tap)">赤い枠</b>がタップする場所です。iPhoneとAndroidで画面が違うところは、その都度書いています。</div>
+    <nav class="toc" aria-label="目次">
+      <a href="#s1"><b>1</b>Gmailを開く</a>
+      <a href="#s2"><b>2</b>右上の丸をタップ</a>
+      <a href="#s3"><b>3</b>別のアカウントを追加</a>
+      <a href="#s4"><b>4</b>Googleを選ぶ</a>
+      <a href="#s5"><b>5</b>確認の画面</a>
+      <a href="#s6"><b>6</b>アドレスを入力</a>
+      <a href="#s7"><b>7</b>パスワードを入力</a>
+      <a href="#s8"><b>8</b>追加できたか確認</a>
+    </nav>
+  </section>
+
+  <!-- 1 -->
+  <section class="step" id="s1">
+    <div class="step-head"><div class="num">1</div><h2>Gmailアプリを開く</h2></div>
+    <p>ホーム画面にある、赤い「M」のアイコンをタップします。</p>
+    <div class="phone" role="img" aria-label="ホーム画面でGmailアプリをタップする図">
+      <div class="screen home">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="apps">
+          <div class="app"><i></i>電話</div>
+          <div class="app"><i></i>カメラ</div>
+          <div class="app"><i></i>写真</div>
+          <div class="app"><i></i>設定</div>
+          <div class="app"><i></i>LINE</div>
+          <div class="app gmail">
+            <i class="tap"><svg width="28" height="22" viewBox="0 0 28 22" aria-hidden="true"><path d="M2 4v16h5V9l7 5 7-5v11h5V4l-2-2-10 7.5L4 2z" fill="#ea4335"/><path d="M2 4v16h5V9z" fill="#4285f4"/><path d="M21 9v11h5V4z" fill="#34a853"/><path d="M26 4l-2-2-3 2.3V9z" fill="#fbbc05"/></svg></i>Gmail
+          </div>
+          <div class="app"><i></i>時計</div>
+          <div class="app"><i></i>マップ</div>
+        </div>
+        <div class="finger" style="left:58px;top:162px">ここをタップ</div>
+      </div>
+    </div>
+    <p>アプリが見つからない場合は、<span class="os">iPhone</span>App Store、<span class="os">Android</span>Playストアで「Gmail」と検索して入れてください。</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="step" id="s2">
+    <div class="step-head"><div class="num">2</div><h2>右上の丸いアイコンをタップ</h2></div>
+    <p>受信トレイの右上に、ご自分の写真か頭文字が入った<span class="em">丸いアイコン</span>があります。そこをタップします。</p>
+    <div class="phone" role="img" aria-label="受信トレイ右上のアカウントアイコンをタップする図">
+      <div class="screen">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="searchbar"><span>☰</span><span class="q">メールを検索</span><span class="avatar av-a tap round">A</span></div>
+        <div class="finger" style="right:8px;top:80px">ここをタップ</div>
+        <div class="inbox-label">メイン</div>
+        <div class="mail"><span class="avatar" style="background:#e8710a">S</span><div class="lines"><div class="bar dark w50"></div><div class="bar w90"></div><div class="bar w70"></div></div></div>
+        <div class="mail"><span class="avatar" style="background:#12b5cb">T</span><div class="lines"><div class="bar dark w70"></div><div class="bar w80"></div><div class="bar w50"></div></div></div>
+        <div class="mail"><span class="avatar" style="background:#188038">Y</span><div class="lines"><div class="bar dark w50"></div><div class="bar w90"></div><div class="bar w70"></div></div></div>
+        <div class="mail"><span class="avatar" style="background:#d93025">M</span><div class="lines"><div class="bar dark w70"></div><div class="bar w80"></div><div class="bar w50"></div></div></div>
+        <div class="compose">✎ 作成</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="step" id="s3">
+    <div class="step-head"><div class="num">3</div><h2>「別のアカウントを追加」をタップ</h2></div>
+    <p>メニューが開きます。<span class="em">「別のアカウントを追加」</span>をタップします。</p>
+    <div class="phone" role="img" aria-label="アカウントメニューで別のアカウントを追加をタップする図">
+      <div class="screen">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="dim"></div>
+        <div class="sheet">
+          <div class="who"><div class="avatar av-a">A</div>あなたのアカウント<br><span style="color:#5f6368">example@gmail.com</span><br><span class="manage">Google アカウントを管理</span></div>
+          <div class="menu">
+            <div class="tap"><span class="plus">＋</span>別のアカウントを追加<span class="finger" style="right:6px;top:-23px">ここをタップ</span></div>
+            <div><span class="gear">⚙</span>このデバイスのアカウントを管理</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="step" id="s4">
+    <div class="step-head"><div class="num">4</div><h2>「Google」を選ぶ</h2></div>
+    <p>メールの種類の一覧が出ます。いちばん上の<span class="em">「Google」</span>をタップします。</p>
+    <div class="phone" role="img" aria-label="メールのセットアップ画面でGoogleを選ぶ図">
+      <div class="screen">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="titlebar">← メールのセットアップ</div>
+        <div class="provider tap"><span class="logo-dot" style="background:#4285f4">G</span>Google</div>
+        <div class="provider"><span class="logo-dot" style="background:#0a64ad">O</span>Outlook、Hotmail、Live</div>
+        <div class="provider"><span class="logo-dot" style="background:#6001d2">Y</span>Yahoo</div>
+        <div class="provider"><span class="logo-dot" style="background:#0078d4">E</span>Exchange と Microsoft 365</div>
+        <div class="provider"><span class="logo-dot" style="background:#9aa0a6">…</span>その他</div>
+        <div class="finger" style="right:20px;top:72px">ここをタップ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="step" id="s5">
+    <div class="step-head"><div class="num">5</div><h2>確認の画面に答える</h2></div>
+    <p><span class="os">iPhone</span>「サインインのために“google.com”を使用しようとしています」と出たら、<span class="em">「続ける」</span>をタップします。</p>
+    <div class="phone" role="img" aria-label="iPhoneの確認ダイアログで続けるをタップする図">
+      <div class="screen">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="titlebar">← メールのセットアップ</div>
+        <div class="provider"><span class="logo-dot" style="background:#4285f4">G</span>Google</div>
+        <div class="provider"><span class="logo-dot" style="background:#0a64ad">O</span>Outlook、Hotmail、Live</div>
+        <div class="provider"><span class="logo-dot" style="background:#6001d2">Y</span>Yahoo</div>
+        <div class="dim"></div>
+        <div class="dialog">
+          <div class="msg"><b>“Gmail”がサインインのために“google.com”を使用しようとしています</b>これによって、アプリとWebサイトがあなたに関する情報を共有することを許可します。</div>
+          <div class="btns"><div>キャンセル</div><div class="tap">続ける</div></div>
+        </div>
+        <div class="finger" style="right:26px;top:300px">ここをタップ</div>
+      </div>
+    </div>
+    <p><span class="os">Android</span>画面ロックの暗証番号や指紋を求められることがあります。いつもスマホを開くときと同じように解除してください。何も出なければ、次へ進んでかまいません。</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="step" id="s6">
+    <div class="step-head"><div class="num">6</div><h2>メールアドレスを入力</h2></div>
+    <p>「ログイン」の画面になります。入力欄に次のアドレスを入れて、<span class="em">「次へ」</span>をタップします。</p>
+    <div class="note" style="text-align:center;font-size:17px;word-break:break-all"><b>kabukikai2525@gmail.com</b></div>
+    <div class="phone" role="img" aria-label="Googleのログイン画面でメールアドレスを入力して次へをタップする図">
+      <div class="screen">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="gsign">
+          <div class="gword"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+          <h3>ログイン</h3>
+          <div class="sub">Gmail に移動</div>
+          <div class="field"><label>メールアドレスまたは電話番号</label>kabukikai2525@gmail.com</div>
+          <div class="link">メールアドレスを忘れた場合</div>
+        </div>
+        <div class="gbtns"><span class="link" style="margin:0">アカウントを作成</span><span class="gbtn tap">次へ</span></div>
+        <div class="finger" style="right:16px;bottom:72px">ここをタップ</div>
+      </div>
+    </div>
+    <p>LINEで届いたアドレスを<span class="em">長押しして「コピー」</span>し、入力欄を長押しして「ペースト（貼り付け）」すると間違いません。手で入れるときは<span class="em">すべて半角</span>で、「@」の前は「kabukikai2525」です。</p>
+  </section>
+
+  <!-- 7 -->
+  <section class="step" id="s7">
+    <div class="step-head"><div class="num">7</div><h2>パスワードを入力</h2></div>
+    <p>「ようこそ」の画面になります。パスワードを入れて、<span class="em">「次へ」</span>をタップします。</p>
+    <div class="phone" role="img" aria-label="パスワードを入力して次へをタップする図">
+      <div class="screen">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="gsign">
+          <div class="gword"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+          <h3>ようこそ</h3>
+          <div class="chip"><span class="avatar av-k">か</span>kabukikai2525@gmail.com ▾</div>
+          <div class="field"><label>パスワードを入力</label>●●●●●●●●●●</div>
+          <div style="margin-top:10px;font-size:12px">☐ パスワードを表示します</div>
+        </div>
+        <div class="gbtns"><span class="link" style="margin:0">パスワードを忘れた場合</span><span class="gbtn tap">次へ</span></div>
+        <div class="finger" style="right:16px;bottom:72px">ここをタップ</div>
+      </div>
+    </div>
+    <p>パスワードもLINEからコピーして貼り付けるのが確実です。手で入れるときは「パスワードを表示します」にチェックを入れると、入れた文字が見えるので間違いに気づきやすくなります。</p>
+  </section>
+
+  <!-- 本人確認 -->
+  <section class="box">
+    <h2>「本人確認」の画面が出たとき</h2>
+    <p style="margin:0">新しいスマホからログインすると、Googleが本人かどうか確かめることがあります。</p>
+    <div class="phone" role="img" aria-label="確認コードを入力する本人確認画面の図">
+      <div class="screen">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="gsign">
+          <div class="gword"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+          <h3>2 段階認証プロセス</h3>
+          <div class="sub">確認コードを記載したテキストメッセージを送信しました</div>
+          <div class="code-box"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div></div>
+        </div>
+        <div class="gbtns"><span class="link" style="margin:0">別の方法を試す</span><span class="gbtn">次へ</span></div>
+      </div>
+    </div>
+    <ul style="margin-top:16px">
+      <li><b>確認コード（数字6桁）を求められた</b><br>コードは歌舞伎会のアカウントに登録された電話番号に届きます。<span class="em">中畑に連絡して</span>、届いたコードを教えてもらってください。</li>
+      <li><b>「ログインしようとしていますか？」と出た</b><br>中畑のスマホに確認が届いています。中畑に「はい」を押してもらうと先へ進みます。</li>
+    </ul>
+    <div class="note">このあと「同意する」や「バックアップ」「後で」などの画面が出たら、<b>「同意する」</b>か<b>「スキップ」</b>を選んで進めてください。</div>
+  </section>
+
+  <!-- 8 -->
+  <section class="step" id="s8">
+    <div class="step-head"><div class="num">8</div><h2>追加できたか確かめる</h2></div>
+    <p>受信トレイに戻ったら、もう一度<span class="em">右上の丸いアイコン</span>をタップします。一覧に<b>kabukikai2525@gmail.com</b>があれば完了です。</p>
+    <div class="phone" role="img" aria-label="アカウント一覧に歌舞伎会のアドレスが追加された図">
+      <div class="screen done-list">
+        <div class="status"><span>9:41</span><span class="r">▮▮▮</span></div>
+        <div class="dim"></div>
+        <div class="sheet">
+          <div class="who"><div class="avatar av-k">か</div>歌舞伎会<br><span style="color:#5f6368">kabukikai2525@gmail.com</span><br><span class="manage">Google アカウントを管理</span></div>
+          <div class="menu">
+            <div><span class="avatar av-a">A</span><span>あなたのアカウント<br><span style="color:#5f6368;font-size:10px">example@gmail.com</span></span></div>
+            <div><span class="plus">＋</span>別のアカウントを追加</div>
+          </div>
+        </div>
+        <div class="finger" style="left:14px;top:46px">追加できました</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使い方 -->
+  <section class="box faq" style="margin-top:40px">
+    <h2>追加したあとの使い方</h2>
+    <h3>アドレスを切り替えるには</h3>
+    <p>右上の丸いアイコンをタップして、見たいほうのアドレスを選びます。アイコンを<b>上下にスワイプ</b>しても切り替えられます。</p>
+    <h3>いまどちらを見ているか確かめるには</h3>
+    <p>右上の丸いアイコンを見ます。歌舞伎会のほうは「か」のアイコンです（色や文字は設定によって違うことがあります）。</p>
+    <h3>メールを送るときの注意</h3>
+    <p>「作成」を押す前に、右上のアイコンで<span class="em">歌舞伎会のアドレスになっているか</span>確かめてください。作成画面の「From」の欄をタップしても、送り主のアドレスを変えられます。</p>
+    <h3>歌舞伎会のアドレスを外したいとき</h3>
+    <p>右上の丸いアイコン →「このデバイスのアカウントを管理」→ 歌舞伎会のアドレスを選んで外します。アカウント自体は消えません。</p>
+  </section>
+
+  <section class="box faq">
+    <h2>うまくいかないとき</h2>
+    <h3>「アカウントが見つかりません」と出る</h3>
+    <p>アドレスの入れ間違いです。LINEのアドレスをコピーして貼り付け直してください。前後に空白が入っていないかも確かめてください。</p>
+    <h3>「パスワードが間違っています」と出る</h3>
+    <p>大文字と小文字、数字の入れ間違いがよくあります。「パスワードを表示します」にチェックを入れて見直してください。何度試してもだめなときは中畑に連絡してください。</p>
+    <h3>本人確認の先に進めない</h3>
+    <p>中畑に連絡して、確認コードを教えてもらうか、「はい」を押してもらってください。</p>
+  </section>
+
+  <footer>歌舞伎会</footer>
+</div>
+</body>
+</html>
